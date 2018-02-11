@@ -68,12 +68,13 @@ def descubrir(the_sock, SND_ADDR, RCV_ADDR):
     retrans = 0
     cuenta=0
     last_pkt = True
+    n=1
     dispositivos={}
     text=SND_ADDR
     packet = make_packet(SND_ADDR, ANY_ADDR, seqnum, acknum, DATA_PACKET, last_pkt, text)
     send_time = time.time()
     sent += 1
-    the_sock.settimeout(1)
+    the_sock.settimeout(2)
     while True:
         try:
             print("buscando")
@@ -83,7 +84,7 @@ def descubrir(the_sock, SND_ADDR, RCV_ADDR):
             ips = dispositivos.values()
             if(data != b'')and(content not in ips):
                 print(data)
-                dispositivos[seqnum] = [content]
+                dispositivos[n] = [source_addr]
                 n+=1
                 # wait a random amount of time
                 rat = machine.rng() & 0x05

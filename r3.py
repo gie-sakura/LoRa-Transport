@@ -25,8 +25,10 @@ sender_lora_address = ANY_ADDR
 print("listo para recibir")
 #ipor=Descubrimiento.responder(the_sock,my_lora_address,sender_lora_address)
 #print(ipor)
-rcvd = swlpv2.trecv(the_sock, my_lora_address, sender_lora_address)
-
-print(rcvd)
-print(sender_lora_address)
-print("The End.")
+while True:
+	rcvd = swlpv2.trecv(the_sock, my_lora_address, sender_lora_address)
+	print(rcvd)
+	#if(rcvd!=sender_lora_address)
+	#	sender_lora_address=rcvd
+	print(sender_lora_address)
+	print("The End.")

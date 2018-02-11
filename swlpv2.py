@@ -173,7 +173,7 @@ def tsend(payload, the_sock, SND_ADDR, RCV_ADDR):
 
             except socket.timeout:
                 if DEBUG_MODE: print("EXCEPTION!! Socket timeout: ", time.time())
-                packet = make_packet(SND_ADDR, ANY_ADDR, seqnum, acknum, DATA_PACKET, last_pkt, text)
+                packet = make_packet(SND_ADDR, RCV_ADDR, seqnum, acknum, DATA_PACKET, last_pkt, text)
                 the_sock.send(packet)
                 if DEBUG_MODE: debug_printpacket("re-sending packet: ", packet)
 
@@ -227,7 +227,6 @@ def trecv(the_sock, MY_ADDR, SND_ADDR):
     the_sock.settimeout(5)      # 5 seconds timeout.... LoRa is slow
     if not last_pkt:
         while True:
-
             while True:
                 # Receive every other packet
                 the_sock.setblocking(True)
